@@ -12,21 +12,36 @@ $ pip install -r requirements.txt
 This requires the [Libri-Light](https://github.com/facebookresearch/libri-light) dataset,
 and the [WHAM](http://wham.whisper.ai/) noise corpus.
 
-
 ## Creating LibriLight-Mix
+
+### Creating meta files
+
+```sh
+$ python create_filenames.py 
+```
+Change the following arguments in the script:
+* **wham_path**:  Folder where the unzipped wham_noise was downloaded (training set).
+* **librilight_path**: Folder where the unzipped Libri-Light data was downloaded.
+* **debug**: Whether to process a dummy dataset.  In the default configuration the script will create over 500 files.
+
+### Creating reverberation meta files
+
+```sh
+$ python run_sample_reverb.py 
+```
+
+### Creating mixture files
 
 ```sh
 $ python create_wham_from_scratch.py 
-    --wsj0-root /path/to/the/wsj/dataset/ 
     --wham-noise-root /path/to/wham_noise/ 
     --output-dir /path/to/output/directory/ 
  
 ```
 
 The arguments for the script are:
-* **wsj0-root**:  Path to the folder containing wsj0/
 * **wham-noise-root**: Folder where the unzipped wham_noise was downloaded.
-* **output-dir**: Where to write the new dataset.  In the default configuration the script will write about 444 GB of data.
+* **output-dir**: Where to write the new dataset.
 
 ## Output data organization
 
