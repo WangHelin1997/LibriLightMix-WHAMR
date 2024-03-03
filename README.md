@@ -1,4 +1,4 @@
-# Generating the WHAMR! dataset
+# Generating the LibriLight-Mix dataset
 
 ## Python requirements
 
@@ -9,11 +9,11 @@ $ pip install -r requirements.txt
 
 ## Prerequisites
 
-This requires the wsj0 (https://catalog.ldc.upenn.edu/LDC93S6A/) dataset,
-and the WHAM noise corpus available here (*http://wham.whisper.ai/*).
+This requires the [Libri-Light](https://github.com/facebookresearch/libri-light) dataset,
+and the [WHAM](http://wham.whisper.ai/) noise corpus.
 
 
-## Creating WHAMR
+## Creating LibriLight-Mix
 
 ```sh
 $ python create_wham_from_scratch.py 
@@ -30,7 +30,7 @@ The arguments for the script are:
 
 ## Output data organization
 
-For each utterance in the training (tr), validation (cv), and testing (tt) set folders, the following wav files are written:
+For each utterance in the training (tr) set folder, the following wav files are written:
 
 1. noise: contains the isolated background noise from WHAM!
 
@@ -55,46 +55,6 @@ For each utterance in the training (tr), validation (cv), and testing (tt) set f
 11. mix_both_reverb: contains mixtures of s1_reverb, s2_reverb, and noise
 
 
-## Generating only a data subset 
+## Reference
 
-In the default configuration, the script outputs all possible permutations of the dataset (8 kHz and 16 kHz sampling rate plus max and min style utterance truncation), and writes approximately 444 GB of audio data.
-
-To generate less data, the script can be trivially modified to generate only a specific utterance truncation and/or sampling rate by changing the lines of _create_wham_from_scratch.py_
-```sh
-SAMPLE_RATES = ['16k', '8k'] # Remove element from this list to generate less data
-DATA_LEN = ['max', 'min'] # Remove element from this list to generate less data
-```
-
-to
-```sh
-SAMPLE_RATES = ['8k']
-DATA_LEN = ['min']
-```
-to only generate 8 kHz min.
-
-## Generating stereo data
-
-The WHAM! noise data was recorded with a binaural microphone and the simulated reverberation applied to the speech signals uses a similar stereo array configuration.  
-By default _create_wham_from_scratch.py_ outputs only the left channel for both noise and reverberated speech signals, but stereo output can be obtained by changing the following line of _create_wham_from_scratch.py_ 
-```sh
-MONO = True # Generate mono audio, change to false for stereo audio
-```
-
-## Comparison with original WHAM! dataset
-
-The _anechoic_ WHAMR! data has small delays between the speakers in order to align with the spatialized reverberant mixtures.
-While these delays mean that _anechoic_ WHAMR! is not identical to WHAM!, in the monophonic case we have trained several models on both WHAM! and _anechoic_ WHAMR! and found that average scale-invariant source to distortion ratio (SI-SDR) on the test set always varies by less than 0.05 dB, so we feel that _anechoic_ WHAMR! results can be compared with those from WHAM!
-
-
-## Citation
-If you find WHAMR! useful, please cite our paper:
-
-```sh
-@inproceedings{Maciejewski2020WHAMR,
-    title     = {WHAMR!: Noisy and Reverberant Single-Channel Speech Separation},
-    author    = {Maciejewski, Matthew and Wichern, Gordon and Le Roux, Jonathan},
-    booktitle = {Proc. IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
-    year      = {2020},
-    month     = may
-}
-```
+https://wham.whisper.ai/WHAMR_README.html
