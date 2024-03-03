@@ -1,7 +1,8 @@
 # Generating the LibriLight-Mix dataset
 
 This script supports generating noisy and reverberant 2-speaker mixture audio for training with the Libri-Light dataset.
-Currently, this script will generate mixture speech of 5 seconds, with speakers in order (speaker1 speaks earlier than speaker2) for [serialized output training](https://arxiv.org/pdf/2003.12687.pdf).
+
+Currently, this script simulates mixture speech of 5 seconds, with speakers in order (speaker1 speaks earlier than speaker2) for [serialized output training](https://arxiv.org/pdf/2003.12687.pdf).
 
 
 ## Python requirements
