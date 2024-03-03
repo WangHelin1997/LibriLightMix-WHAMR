@@ -10,7 +10,7 @@ SEED = 17
 np.random.seed(SEED)
 random.seed(SEED)
 
-FILELIST_STUB = os.path.join('data', '/data/lmorove1/hwang258/wsj0-2mix/wham/whamr_scripts/data/mix_2_spk_filenames_librilight_{}.csv')
+FILELIST_STUB = os.path.join('data', 'mix_2_spk_filenames_librilight_{}.csv')
 REVERB_STUB = os.path.join('data', 'reverb_params_librilight_{}.csv')
 
 for split_long, split_short in SPLIT_NAMES.items():
