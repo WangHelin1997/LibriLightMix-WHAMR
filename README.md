@@ -27,7 +27,7 @@ $ python create_filenames.py
 Change the following arguments in the script:
 * **wham_path**:  Folder where the unzipped wham_noise was downloaded (training set).
 * **librilight_path**: Folder where the unzipped Libri-Light data was downloaded.
-* **debug**: Whether to process a dummy dataset.  In the default configuration the script will create over 500 files.
+* **debug**: Whether to process a dummy dataset.  In the default configuration the script will create around 500 files.
 
 ### Creating reverberation meta files
 
