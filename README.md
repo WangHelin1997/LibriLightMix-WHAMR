@@ -28,6 +28,7 @@ Change the following arguments in the script:
 * **wham_path**:  Folder where the unzipped wham_noise was downloaded (training set).
 * **librilight_path**: Folder where the unzipped Libri-Light data was downloaded.
 * **debug**: Whether to process a dummy dataset.  In the default configuration the script will create around 500 files.
+* **SOT**: Whether to process speakers in order (speaker1 speaks earlier than speaker2) for serialized output training.
 
 ### Creating reverberation meta files
 
