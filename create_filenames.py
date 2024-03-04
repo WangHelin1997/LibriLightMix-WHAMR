@@ -8,9 +8,10 @@ from tqdm import tqdm
 wham_path = '/data/lmorove1/hwang258/librimix/wham_noise/tr'
 librilight_path = '/data/lmorove1/hwang258/librilight/small'
 debug=True
+SOT=True
+
 count=0
 SEED=17
-ST=True
 random.seed(SEED)
 
 csvdata = [
@@ -43,8 +44,8 @@ for spk in spks:
                 another_vads = another_audiodata["voice_activity"]
                 another_vad = random.choice(another_vads)
                 noisefile = random.choice(noise_files)
-                s1_start = random.uniform(0, 0.3)
-                s2_start = random.uniform(0.6, 1.3)
+                s1_start = random.uniform(0, 0.3) if SOT else random.uniform(0, 0.5)
+                s2_start = random.uniform(0.6, 1.3) if SOT else random.uniform(0, 0.5)
                 s1_snr = random.uniform(-3, 6)
                 s2_snr = random.uniform(-3, 6)
                 noise_snr = random.uniform(-6, 3)
