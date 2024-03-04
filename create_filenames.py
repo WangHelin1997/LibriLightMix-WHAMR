@@ -10,6 +10,7 @@ librilight_path = '/data/lmorove1/hwang258/librilight/small'
 debug=True
 count=0
 SEED=17
+ST=True
 random.seed(SEED)
 
 csvdata = [
