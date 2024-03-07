@@ -3,7 +3,7 @@ import soundfile as sf
 from scipy.signal import resample_poly
 
 
-def read_scaled_wav(path, scaling_factor, start=0, end=None, downsample_8K=False, mono=True,sr=16000):
+def read_scaled_wav(path, scaling_factor, start=0, end=None, sr=16000, mono=True):
     if end is not None:
         samples, sr_orig = sf.read(path, start=int(start*sr), stop=int(end*sr))
     else:
@@ -12,8 +12,8 @@ def read_scaled_wav(path, scaling_factor, start=0, end=None, downsample_8K=False
     if len(samples.shape) > 1 and mono:
         samples = samples[:, 0]
 
-    if downsample_8K:
-        samples = resample_poly(samples, 8000, sr_orig)
+    if sr != sr_orig:
+        samples = resample_poly(samples, sr, sr_orig)
     
     samples /= np.max(np.abs(samples))
     samples *= scaling_factor
@@ -36,47 +36,31 @@ def wavwrite(file, samples, sr):
     sf.write(file, int_samples, sr, subtype='PCM_16')
 
 
-def append_or_truncate(s1_samples, s2_samples, noise_samples, min_or_max='max', start_samp_16k=0, downsample=False, fixed_length=80000):
-    if downsample:
-        speech_start_sample = start_samp_16k // 2
-    else:
-        speech_start_sample = start_samp_16k
-
-    if min_or_max == 'min':
-        speech_end_sample = speech_start_sample + len(s1_samples)
-        noise_samples = noise_samples[speech_start_sample:speech_end_sample]
-    else:
-        speech_end_sample = len(s1_samples) - speech_start_sample
-        s1_append = np.zeros_like(noise_samples)
-        s2_append = np.zeros_like(noise_samples)
-        s1_append[speech_start_sample:len(s1_samples)] = s1_samples[0:speech_end_sample]
-        s2_append[speech_start_sample:len(s1_samples)] = s2_samples[0:speech_end_sample]
-        s1_samples = s1_append
-        s2_samples = s2_append
-    s1_samples=s1_samples[:fixed_length]
-    s2_samples=s2_samples[:fixed_length]
-    noise_samples=noise_samples[:fixed_length]
-
-    return s1_samples, s2_samples, noise_samples
-
-
-def append_zeros(samples, desired_length):
-    samples_to_add = desired_length - len(samples)
-    if len(samples.shape) == 1:
-        new_zeros = np.zeros(samples_to_add)
-    elif len(samples.shape) == 2:
-        new_zeros = np.zeros((samples_to_add, 2))
-    return np.append(samples, new_zeros, axis=0)
-
-
-def fix_length(s1, tag, fix_length=5, sr=16000):
-    # Fix length
-    s1_out = np.zeros(sr*fix_length)
-    if s1.shape[0] < fix_length*sr - int(sr*tag) - 1: # avoid out of shape
-        s1_out[int(sr*tag):s1.shape[0]+int(sr*tag)] = s1
-    else:
-        s1_out[int(sr*tag):] = s1[:(sr*fix_length-int(sr*tag))]
-    return s1_out
+def fix_length(s1, s2, tag1, tag2, mode='fix', fixed_len=5, sr=16000):
+    # mode: {'fix', 'min', 'max'}
+    # tag: start time
+    if mode == 'fix':
+        # Fix length
+        s1_out, s2_out = np.zeros(int(sr*fixed_len)), np.zeros(int(sr*fixed_len))
+        if s1.shape[0] < int(fixed_len*sr) - int(sr*tag1) - 1: # avoid out of shape
+            s1_out[int(sr*tag1):s1.shape[0]+int(sr*tag1)] = s1
+        else:
+            s1_out[int(sr*tag1):] = s1[:(int(sr*fixed_len)-int(sr*tag1))]
+        if s2.shape[0] < int(fixed_len*sr) - int(sr*tag2) - 1: # avoid out of shape
+            s2_out[int(sr*tag2):s2.shape[0]+int(sr*tag2)] = s2
+        else:
+            s2_out[int(sr*tag2):] = s2[:(int(sr*fixed_len)-int(sr*tag2))]
+    elif mode == 'min':
+        utt_len = np.minimum(s1.shape[0]+int(sr*tag1), s2.shape[0]+int(sr*tag2))
+        s1_out, s2_out = np.zeros(utt_len), np.zeros(utt_len)
+        s1_out[int(sr*tag1):] = s1[:(utt_len-int(sr*tag1))]
+        s2_out[int(sr*tag2):] = s2[:(utt_len-int(sr*tag2))]
+    else:  # max
+        utt_len = np.maximum(s1.shape[0]+int(sr*tag1), s2.shape[0]+int(sr*tag2))
+        s1_out, s2_out = np.zeros(utt_len), np.zeros(utt_len)
+        s1_out[int(sr*tag1):s1.shape[0]+int(sr*tag1)] = s1
+        s2_out[int(sr*tag2):s2.shape[0]+int(sr*tag2)] = s2
+    return s1_out, s2_out
 
 
 def create_wham_mixes(s1_samples, s2_samples, noise_samples):
