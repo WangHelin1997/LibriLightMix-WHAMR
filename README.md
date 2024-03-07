@@ -4,7 +4,7 @@ This script supports generating noisy and reverberant 2-speaker mixture audio fo
 
 ## Python requirements
 
-Requires python 3.7, and the numpy, scipy, pandas, pyroomacoustics, and pysoundfile packages
+Requires python 3.8, and the numpy, scipy, pandas, pyroomacoustics, and pysoundfile packages
 ```sh
 $ pip install -r requirements.txt
 ```
