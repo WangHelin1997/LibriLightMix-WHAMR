@@ -1,6 +1,6 @@
 # Generating the LibriLight-Mix dataset
 
-This script supports generating noisy and reverberant 2-speaker mixture audio for training with the Libri-Light dataset.
+This script supports generating noisy and reverberant 2-speaker mixture audio for training with the Libri-Light dataset, which can be served as training materials for large-scale robust speech separation.
 
 ## Python requirements
 
