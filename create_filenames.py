@@ -7,7 +7,7 @@ from tqdm import tqdm
 
 wham_path = '/data/lmorove1/hwang258/librimix/wham_noise/tr'
 librilight_path = '/data/lmorove1/hwang258/librilight/small'
-debug=True
+debug=False
 SOT=True
 
 count=0
@@ -31,7 +31,7 @@ for spk in spks:
             audiodata = json.load(file)
         vads = audiodata["voice_activity"]
         if debug:
-            if count > 500:
+            if count > 50:
                 break
         for vad in tqdm(vads):
             if float(vad[1]) - float(vad[0]) > 2.:
