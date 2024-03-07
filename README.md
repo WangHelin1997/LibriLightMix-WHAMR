@@ -37,7 +37,7 @@ $ python run_sample_reverb.py
 
 ```sh
 $ python create_wham_from_scratch.py --mono \
-    --output-dir /data/lmorove1/hwang258/wsj0-2mix/wham/librilight_whamr/ \
+    --output-dir ./librilight_whamr/ \
     --mode fix \
     --sr 16000 \
     --fixed-len 5
@@ -45,8 +45,10 @@ $ python create_wham_from_scratch.py --mono \
 ```
 
 The arguments for the script are:
-* **wham-noise-root**: Folder where the unzipped wham_noise was downloaded.
 * **output-dir**: Where to write the new dataset.
+* **mode**: Length of the simulated speech: "fix" for a fixed length, "min" for the minimum length of the two utterences, and "max" for the maximum length of the two utterences.
+* **sr**: Sampling rate.
+* **fixed-len**: Fixed length in mode "fix".
 
 ## Output data organization
 
