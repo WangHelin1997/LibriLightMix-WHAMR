@@ -66,13 +66,13 @@ For each utterance in the training (tr) set folder, the following wav files are 
 
 6. mix_single_anechoic: for speech enhancement, contains mixture of s1_anechoic and noise
 
-7. mix_clean_anechoic: clean speech separation for two speakers, contains mixture of s1_anechoic and s2_anechoic.  The relative levels between speakers should match the original wsj0-2mix dataset, but the overall level of the mix will be different.
+7. mix_clean_anechoic: clean speech separation for two speakers, contains mixture of s1_anechoic and s2_anechoic.  The relative levels between speakers should match the original libri-light dataset, but the overall level of the mix will be different.
 
 8. mix_both_anechoic: contains mixtures of s1_anechoic, s2_anechoic, and noise
 
 9. mix_single_reverb: for speech enhancement, contains mixture of s1_reverb and noise
 
-10. mix_clean_reverb: clean speech separation for two reverberant speakers, contains a mixture of s1_reverb and s2_reverb.  The relative levels between speakers should match the original wsj0-2mix dataset, but the overall level of the mix will be different.
+10. mix_clean_reverb: clean speech separation for two reverberant speakers, contains a mixture of s1_reverb and s2_reverb.  The relative levels between speakers should match the original libri-light dataset, but the overall level of the mix will be different.
 
 11. mix_both_reverb: contains mixtures of s1_reverb, s2_reverb, and noise
 
