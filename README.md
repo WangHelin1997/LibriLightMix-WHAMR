@@ -9,6 +9,12 @@ Requires python 3.8, and the numpy, scipy, pandas, pyroomacoustics, and pysoundf
 $ pip install -r requirements.txt
 ```
 
+If you cannot install the ```pyroomacoustics``` successfully, you can try:
+```sh
+$ pip install pyroomacoustics
+$ pip install -r requirements.txt
+```
+
 ## Prerequisites
 
 This requires the [Libri-Light](https://github.com/facebookresearch/libri-light) dataset,
