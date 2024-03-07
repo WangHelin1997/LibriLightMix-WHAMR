@@ -2,9 +2,6 @@
 
 This script supports generating noisy and reverberant 2-speaker mixture audio for training with the Libri-Light dataset.
 
-Currently, this script simulates mixture speech of 5 seconds, with speakers in order (speaker1 speaks earlier than speaker2) for [serialized output training](https://arxiv.org/pdf/2003.12687.pdf).
-
-
 ## Python requirements
 
 Requires python 3.7, and the numpy, scipy, pandas, pyroomacoustics, and pysoundfile packages
@@ -28,7 +25,7 @@ Change the following arguments in the script:
 * **wham_path**:  Folder where the unzipped wham_noise was downloaded (training set).
 * **librilight_path**: Folder where the unzipped Libri-Light data was downloaded.
 * **debug**: Whether to process a dummy dataset.  In the default configuration the script will create around 500 files.
-* **SOT**: Whether to process speakers in order (speaker1 speaks earlier than speaker2) for serialized output training.
+* **SOT**: Whether to process speakers in order (speaker1 speaks earlier than speaker2) for [serialized output training](https://arxiv.org/pdf/2003.12687.pdf).
 
 ### Creating reverberation meta files
 
@@ -39,9 +36,11 @@ $ python run_sample_reverb.py
 ### Creating mixture files
 
 ```sh
-$ python create_wham_from_scratch.py 
-    --wham-noise-root /path/to/wham_noise/ 
-    --output-dir /path/to/output/directory/ 
+$ python create_wham_from_scratch.py --mono \
+    --output-dir /data/lmorove1/hwang258/wsj0-2mix/wham/librilight_whamr/ \
+    --mode fix \
+    --sr 16000 \
+    --fixed-len 5
  
 ```
 
