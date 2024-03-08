@@ -131,7 +131,7 @@ def create_wham(args, output_root):
         for i_utt, output_name in enumerate(utt_ids):
             cmds.append((i_utt, output_name, wsjmix_df, reverb_param_df, SAMPLE_RATES, output_root, MODE, splt, FIXED_LEN, ch_ind, LEFT_CH_IND))
         print('Totally {} utterances'.format(len(cmds)))
-        random.shuffle(cmds)
+        random.shuffle(cmds) # For parallel CPU processing, which can run several scripts at the same time.
         with multiprocessing.Pool(processes=20) as pool:
             pool.starmap(create_one, cmds)
 
