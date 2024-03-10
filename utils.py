@@ -42,11 +42,11 @@ def fix_length(s1, s2, tag1, tag2, mode='fix', fixed_len=5, sr=16000):
     if mode == 'fix':
         # Fix length
         s1_out, s2_out = np.zeros(int(sr*fixed_len)), np.zeros(int(sr*fixed_len))
-        if s1.shape[0] < int(fixed_len*sr) - int(sr*tag1) - 1: # avoid out of shape
+        if s1.shape[0] < int(fixed_len*sr) - int(sr*tag1): # avoid out of shape
             s1_out[int(sr*tag1):s1.shape[0]+int(sr*tag1)] = s1
         else:
             s1_out[int(sr*tag1):] = s1[:(int(sr*fixed_len)-int(sr*tag1))]
-        if s2.shape[0] < int(fixed_len*sr) - int(sr*tag2) - 1: # avoid out of shape
+        if s2.shape[0] < int(fixed_len*sr) - int(sr*tag2): # avoid out of shape
             s2_out[int(sr*tag2):s2.shape[0]+int(sr*tag2)] = s2
         else:
             s2_out[int(sr*tag2):] = s2[:(int(sr*fixed_len)-int(sr*tag2))]
