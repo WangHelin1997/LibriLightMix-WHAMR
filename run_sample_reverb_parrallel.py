@@ -17,8 +17,7 @@ for filelist in filelists:
     REVERB_STUB = FILELIST_STUB.replace('mix_2_spk_filenames', 'reverb_params')
 
     for split_long, split_short in SPLIT_NAMES.items():
-        print('Running {} Set'.format(split_long))
-        filelist_path = FILELIST_STUB.format(split_short)
+        filelist_path = FILELIST_STUB
         filelist_df = pd.read_csv(filelist_path)
         utt_ids = list(filelist_df['output_filename'])
 
