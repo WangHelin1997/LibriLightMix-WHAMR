@@ -13,7 +13,7 @@ random.seed(SEED)
 
 filelists = glob.glob('data/medium/*.csv')
 for filelist in filelists:
-    FILELIST_STUB = os.path.join('data','medium',filelist)
+    FILELIST_STUB = filelist
     REVERB_STUB = FILELIST_STUB.replace('mix_2_spk_filenames', 'reverb_params')
 
     for split_long, split_short in SPLIT_NAMES.items():
