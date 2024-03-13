@@ -56,6 +56,51 @@ The arguments for the script are:
 * **sr**: Sampling rate.
 * **fixed-len**: Fixed length in mode "fix".
 
+## Creating LibriLight-Mix parallelly with mulitple CPUs
+
+### Creating meta files
+
+```sh
+$ python create_filenames_parallel.py 
+```
+Change the following arguments in the script:
+* **wham_path**:  Folder where the unzipped wham_noise was downloaded (training set).
+* **librilight_path**: Folder where the unzipped Libri-Light data was downloaded.
+* **savename**: Name of the meta .csv file to save.
+* **tag**: Name of the meta .csv folder to save.
+* **debug**: Whether to process a dummy dataset.
+* **SOT**: Whether to process speakers in order (speaker1 speaks earlier than speaker2) for [serialized output training](https://arxiv.org/pdf/2003.12687.pdf).
+
+### Creating reverberation meta files
+
+```sh
+$ python run_sample_reverb_parallel.py 
+```
+Change the **filelists** according to the **tag**.
+
+### Creating mixture files
+
+```
+for i in $(seq 0 51)
+do
+    python create_wham_from_scratch_parallel.py --mono \
+        --output-dir "./LibrilightMix-medium/$i/" \
+        --filepath "data/medium/mix_2_spk_filenames_librilight_tr_medium$i.csv" \
+        --mode fix \
+        --sr 16000 \
+        --fixed-len 5
+done
+```
+
+The arguments for the script are:
+* **output-dir**: Where to write the new dataset.
+* **filepath**: Name of the saved meta .csv folder.
+* **mode**: Length of the simulated speech: "fix" for a fixed length, "min" for the minimum length of the two utterences, and "max" for the maximum length of the two utterences.
+* **sr**: Sampling rate.
+* **fixed-len**: Fixed length in mode "fix".
+
+
+
 ## Output data organization
 
 For each utterance in the training (tr) set folder, the following wav files are written:
