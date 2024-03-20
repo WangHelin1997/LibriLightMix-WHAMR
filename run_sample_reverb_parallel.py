@@ -11,7 +11,7 @@ SEED = 17
 np.random.seed(SEED)
 random.seed(SEED)
 
-filelists = glob.glob('data/medium/*.csv')
+filelists = glob.glob('data/small/*.csv')
 for filelist in filelists:
     FILELIST_STUB = filelist
     REVERB_STUB = FILELIST_STUB.replace('mix_2_spk_filenames', 'reverb_params')
