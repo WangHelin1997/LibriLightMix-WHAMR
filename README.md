@@ -81,7 +81,7 @@ Change the **filelists** according to the **tag**.
 ### Creating mixture files
 
 ```
-for i in $(seq 0 51)
+for i in $(seq 0 49)
 do
     python create_wham_from_scratch_parallel.py --mono \
         --output-dir "./LibrilightMix-medium/$i/" \
