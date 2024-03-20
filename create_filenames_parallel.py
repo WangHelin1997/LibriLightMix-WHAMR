@@ -81,7 +81,7 @@ subspks_size = len(spks) // num_subspks
 
 random.shuffle(spks)
 # Split the list into subspks
-subspks = [spks[i:i+subspks_size] for i in range(0, len(spks), subspks_size)]
+subspks = [spks[i*subspks_size:(i+1)*subspks_size] for i in range(num_subspks)] 
 
 # If there are remaining elements, distribute them among the subspks
 if len(spks) % num_subspks != 0:
