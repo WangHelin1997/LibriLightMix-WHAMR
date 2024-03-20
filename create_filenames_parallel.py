@@ -6,10 +6,10 @@ import json
 from tqdm import tqdm
 import multiprocessing
 
-wham_path = '/data/lmorove1/hwang258/librimix/wham_noise/tr'
-librilight_path = '/data/lmorove1/hwang258/librilight/medium'
-savename = 'mix_2_spk_filenames_librilight_tr_medium'
-tag='medium'
+wham_path = './wham_noise/tr'
+librilight_path = './librilight/small'
+savename = 'mix_2_spk_filenames_librilight_tr_small'
+tag='small'
 debug=False
 SOT=True
 
