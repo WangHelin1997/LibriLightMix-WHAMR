@@ -5,8 +5,8 @@ import glob
 import json
 from tqdm import tqdm
 
-wham_path = '/data/lmorove1/hwang258/librimix/wham_noise/tr'
-librilight_path = '/data/lmorove1/hwang258/librilight/small'
+wham_path = './wham_noise/tr'
+librilight_path = './librilight/small'
 debug=False
 SOT=True
 
