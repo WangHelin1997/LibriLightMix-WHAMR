@@ -15,7 +15,7 @@ def read_scaled_wav(path, scaling_factor, start=0, end=None, sr=16000, mono=True
     if sr != sr_orig:
         samples = resample_poly(samples, sr, sr_orig)
     
-    samples /= np.max(np.abs(samples))
+    samples /= np.max(np.abs(samples)) + 1e-8
     samples *= scaling_factor
     return samples
 
