@@ -2,6 +2,8 @@
 
 This script supports generating noisy and reverberant 2-speaker mixture audio for training with the Libri-Light dataset, which can be served as training materials for large-scale robust speech separation.
 
+If you want to mix more speakers, please refer to [LibriLightMix-WHAM](https://github.com/WangHelin1997/LibriLightMix-WHAM).
+
 ## Python requirements
 
 Requires python 3.8, and the numpy, scipy, pandas, pyroomacoustics, and pysoundfile packages
