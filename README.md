@@ -16,6 +16,7 @@ If you cannot install the ```pyroomacoustics``` successfully, you can try:
 $ conda install -c conda-forge gcc
 $ conda install -c conda-forge cxx-compiler
 $ conda install -c conda-forge libstdcxx-ng
+$ export LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH
 $ pip install pyroomacoustics
 $ pip install -r requirements.txt
 ```
